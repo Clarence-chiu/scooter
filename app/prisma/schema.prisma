@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  isRenting Boolean @default(false)
+
+  email String @unique
+  hash String
+
+  firstName String?
+  lastName String?
+
+  @@map("users")
+}
+
+model Scooter{
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  latitude  Float
+  longitude Float
+  isRenting Boolean @default(false)
+
+  rent Rent[]
+
+  @@map("scooters")
+}
+
+model Rent {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rentalStartTime DateTime @default(now())
+  rentalEndTime DateTime?
+
+  statu Boolean @default(true)
+
+  userId Int
+
+  scooterId Int
+  scooter Scooter @relation(fields: [scooterId], references: [id])
+  
+  @@map("rent")
+}
