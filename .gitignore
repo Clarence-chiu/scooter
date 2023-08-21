@@ -15,11 +15,11 @@ logs
 .DS_Store
 
 # Tests
-/app//coverage
-/app//.nyc_output
+/app/coverage
+/app/.nyc_output
 
 # IDEs and editors
-/app//.idea
+/app/.idea
 /app/.project
 /app/.classpath
 /app/.c9/
