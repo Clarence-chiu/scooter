@@ -44,6 +44,7 @@ ___
 - file: /src/rental/rental.controller.ts
 - method: class RentalProcess
 - 伺服器啟動 10 秒鐘後會開始執行此 method
+	前置:
 	- 會清空 DB 中三張 Table 的所有資料
 	- 會新增三筆 Scooter 資料
 
@@ -52,7 +53,7 @@ ___
 	2. 使用整登入
 	3. 取的所有可租借的 scooter
 	4. 使用者租借第一台的 scooter
-	5. 使用者嘗試資界另一台 scooter (不會成功)
+	5. 使用者嘗試租借另一台 scooter (不會成功)
 	6. 另一位使用者嘗試租借第一台 scooter (不會成功)
 	7. 使用者歸還 scooter
 
