@@ -8,6 +8,4 @@ RUN yarn install
 
 WORKDIR /project
 
-RUN cmode ./project/app/install.sh
-
 EXPOSE 8888

@@ -9,12 +9,11 @@ services:
     volumes:
       - ./scooter:/project
     ports:
-      - "80:8888"
+      - "8888:8888"
     depends_on:
       - postgres_db
-    command: tail -f /dev/null 
+    command: sh -c "cd /project/app && npm install && yarn prisma:dev:deploy && yarn prisma:test:deploy && tail -f /dev/null"
     tty: true
-    # command: npm run start:dev
 
   postgres_db:
     image: postgres:13
