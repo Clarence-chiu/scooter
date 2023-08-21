@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  scooter_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: scooter_dev
+    container_name: scooter_api 
+    volumes:
+      - ./scooter:/project
+    ports:
+      - "8888:8888"
+    depends_on:
+      - postgres_db
+    command: tail -f /dev/null 
+    tty: true
+    # command: npm run start:dev
+    depends_on: 
+      - postgres_db
+
+  postgres_db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: scooter
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # unit test db
+  test_postgres_db:
+    image: postgres:13
+    container_name: test_postgres_db
+    environment:
+      POSTGRES_USER: postgres  
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: scooter  
+    ports:
+      - "5435:5432"  
+
+volumes:
+  pg_data:
